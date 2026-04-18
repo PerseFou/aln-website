@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALN — Association des Licenciés et Masters en Notariat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --burgundy:       #7A1E2E;
+      --burgundy-dark:  #5C1520;
+      --burgundy-hover: #8C2235;
+      --gold:           #B8963E;
+      --gold-light:     #D4AF6A;
+      --cream:          #F7F3EE;
+      --cream-deep:     #EDE7DC;
+      --charcoal:       #181818;
+      --charcoal-mid:   #2C2C2C;
+      --mid:            #4A4744;
+      --muted:          #7A7774;
+      --light:          #B4B0AB;
+      --white:          #FFFFFF;
+      --border:         rgba(122,30,46,0.12);
+      --border-light:   rgba(0,0,0,0.07);
+      --max-w:          1240px;
+      --section-py:     96px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--mid);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ── UTILITY ─────────────────────────────── */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--burgundy);
+    }
+
+    .section-lead {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 520px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--burgundy);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--burgundy-dark); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--burgundy);
+      border: 1.5px solid var(--burgundy);
+    }
+    .btn-outline:hover { background: var(--burgundy); color: var(--white); }
+
+    .btn-outline-white {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.4);
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+
+    .btn svg { width: 14px; height: 14px; transition: transform 0.2s; }
+    .btn:hover svg { transform: translateX(3px); }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    /* ── TOP BAR ─────────────────────────────── */
+    .topbar {
+      background: var(--charcoal);
+      padding: 8px 0;
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.06em;
+    }
+    .topbar-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .topbar a { color: rgba(255,255,255,0.45); transition: color 0.2s; }
+    .topbar a:hover { color: var(--gold); }
+    .topbar-links { display: flex; gap: 24px; }
+
+    /* ── HEADER ──────────────────────────────── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border-light);
+      transition: box-shadow 0.3s;
+    }
+    .header.scrolled {
+      box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 32px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+    .logo img {
+      height: 44px;
+      width: auto;
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      border-left: 1.5px solid var(--border);
+      padding-left: 14px;
+    }
+    .logo-text strong {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--burgundy);
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+    }
+    .logo-text span {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    nav { display: flex; align-items: center; gap: 0; }
+
+    .nav-link {
+      position: relative;
+      display: inline-block;
+      padding: 28px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--mid);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background: var(--burgundy);
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
+    }
+    .nav-link:hover { color: var(--burgundy); }
+    .nav-link:hover::after,
+    .nav-link.active::after { transform: scaleX(1); }
+    .nav-link.active { color: var(--burgundy); }
+
+    .header-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: 16px;
+    }
+
+    .btn-login {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--mid);
+      text-transform: uppercase;
+      padding: 8px 0;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-login:hover { color: var(--burgundy); border-color: var(--burgundy); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 1.5px;
+      background: var(--charcoal);
+      transition: all 0.3s;
+    }
+
+    /* ── HERO ────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--charcoal);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(105deg, rgba(24,24,24,0.96) 45%, rgba(24,24,24,0.6) 100%),
+        url('https://wp.e-aln.be/wp-content/uploads/2021/10/Soiree-About-Last-Night-2021.jpg') center/cover no-repeat;
+      filter: grayscale(40%);
+    }
+
+    .hero-decor {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 45%;
+      height: 100%;
+      border-left: 1px solid rgba(184,150,62,0.15);
+      pointer-events: none;
+    }
+    .hero-decor::before {
+      content: '';
+      position: absolute;
+      top: 60px;
+      right: 60px;
+      width: 160px;
+      height: 160px;
+      border: 1px solid rgba(184,150,62,0.1);
+    }
+    .hero-decor::after {
+      content: '';
+      position: absolute;
+      bottom: 80px;
+      right: 40px;
+      width: 80px;
+      height: 80px;
+      border: 1px solid rgba(184,150,62,0.12);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-content { padding: 80px 0; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 1.5px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 5.5vw, 72px);
+      font-weight: 300;
+      line-height: 1.08;
+      color: var(--white);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    .hero-title strong {
+      font-weight: 600;
+      color: var(--white);
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+      margin-bottom: 40px;
+      max-width: 460px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+    }
+    .hero-stat-num span { color: var(--gold); }
+    .hero-stat-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 40px 36px;
+      backdrop-filter: blur(8px);
+    }
+    .hero-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+    .hero-card-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .hero-card-item:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .hero-card-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+    .hero-card-item-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 2px;
+    }
+    .hero-card-item-text {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.5;
+    }
+
+    /* ── TICKER ──────────────────────────────── */
+    .ticker {
+      background: var(--burgundy);
+      padding: 14px 0;
+      overflow: hidden;
+    }
+    .ticker-inner {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      animation: ticker-scroll 30s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      padding: 0 40px;
+    }
+    .ticker-item::after {
+      content: '◆';
+      font-size: 7px;
+      color: var(--gold);
+    }
+    @keyframes ticker-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── AVANTAGES ───────────────────────────── */
+    .avantages {
+      padding: var(--section-py) 0;
+      background: var(--white);
+    }
+
+    .avantages-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-bottom: 72px;
+    }
+
+    .avantages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border-light);
+      border: 1px solid var(--border-light);
+    }
+
+    .avantage-card {
+      background: var(--white);
+      padding: 40px 36px;
+      transition: background 0.25s;
+    }
+    .avantage-card:hover { background: var(--cream); }
+
+    .avantage-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--border-light);
+      line-height: 1;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .avantage-card:hover .avantage-num { color: rgba(122,30,46,0.08); }
+
+    .avantage-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 20px;
+    }
+    .avantage-icon svg { width: 100%; height: 100%; }
+
+    .avantage-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .avantage-text {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: gap 0.2s, border-color 0.2s;
+    }
+    .link-arrow:hover { gap: 12px; border-color: var(--burgundy); }
+
+    /* ── ÉVÉNEMENTS ──────────────────────────── */
+    .evenements {
+      padding: var(--section-py) 0;
+      background: var(--cream);
+    }
+
+    .evenements-inner {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .evenements-aside { position: sticky; top: 100px; }
+
+    .event-list { display: flex; flex-direction: column; gap: 0; }
+
+    .event-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 24px;
+      align-items: start;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border-light);
+      transition: background 0.2s;
+    }
+    .event-item:last-child { border-bottom: none; }
+
+    .event-date {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      text-align: center;
+      padding: 12px 8px;
+      flex-shrink: 0;
+    }
+    .event-date-day {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--burgundy);
+      line-height: 1;
+    }
+    .event-date-month {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .event-tag {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(184,150,62,0.35);
+      padding: 3px 8px;
+      margin-bottom: 6px;
+    }
+
+    .event-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .event-meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .event-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      margin-top: 8px;
+    }
+    .event-cta svg { width: 12px; height: 12px; }
+
+    /* ── COTISATION ──────────────────────────── */
+    .cotisation {
+      background: var(--burgundy);
+      padding: var(--section-py) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .cotisation::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 400px;
+      height: 400px;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .cotisation::after {
+      content: '';
+      position: absolute;
+      bottom: -120px;
+      left: -60px;
+      width: 320px;
+      height: 320px;
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+
+    .cotisation-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .cotisation-text .section-title { color: var(--white); }
+    .cotisation-text .section-lead { color: rgba(255,255,255,0.55); max-width: 100%; }
+    .cotisation-text .eyebrow { color: var(--gold); }
+    .cotisation-text .eyebrow::before { background: var(--gold); }
+
+    .cotisation-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 44px 40px;
+    }
+
+    .cotisation-price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .cotisation-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+    }
+    .cotisation-currency {
+      font-size: 24px;
+      color: rgba(255,255,255,0.5);
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .cotisation-period {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .cotisation-list {
+      list-style: none;
+      margin-bottom: 36px;
+    }
+    .cotisation-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .cotisation-list li:last-child { border-bottom: none; }
+    .cotisation-list li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--burgundy);
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      width: 100%;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .btn-white:hover { background: var(--cream); }
+
+    .cotisation-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      margin-top: 12px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ── CHIFFRES ────────────────────────────── */
+    .chiffres {
+      padding: var(--section-py) 0;
+      background: var(--white);
+    }
+    .chiffres-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border-light);
+    }
+    .chiffre-item {
+      padding: 48px 40px;
+      border-right: 1px solid var(--border-light);
+      text-align: center;
+    }
+    .chiffre-item:last-child { border-right: none; }
+    .chiffre-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px;
+      font-weight: 300;
+      color: var(--burgundy);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .chiffre-num sup {
+      font-size: 28px;
+      vertical-align: super;
+    }
+    .chiffre-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── SPONSORS ────────────────────────────── */
+    .sponsors {
+      padding: 64px 0;
+      background: var(--cream-deep);
+      border-top: 1px solid var(--border-light);
+    }
+    .sponsors-label {
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 32px;
+    }
+    .sponsors-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    .sponsor-placeholder {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--light);
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    .sponsor-placeholder:hover { color: var(--burgundy); }
+
+    /* ── CONTACT ─────────────────────────────── */
+    .contact {
+      padding: var(--section-py) 0;
+      background: var(--white);
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--charcoal);
+      background: var(--cream);
+      border: 1px solid transparent;
+      border-radius: 0;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-input:focus,
+    .form-textarea:focus {
+      background: var(--white);
+      border-color: var(--burgundy);
+    }
+    .form-textarea { min-height: 120px; resize: vertical; }
+
+    .contact-info { padding-top: 8px; }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .contact-info-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-info-icon svg { width: 18px; height: 18px; color: var(--burgundy); }
+    .contact-info-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .contact-info-value {
+      font-size: 14px;
+      color: var(--charcoal);
+    }
+
+    .social-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-light);
+    }
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .social-link:hover { background: var(--burgundy); }
+    .social-link:hover svg { color: var(--white); }
+    .social-link svg { width: 16px; height: 16px; color: var(--mid); transition: color 0.2s; }
+
+    /* ── FOOTER ──────────────────────────────── */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.45);
+    }
+    .footer-main {
+      display: grid;
+      grid-template-columns: 280px 1fr 1fr 1fr;
+      gap: 64px;
+      padding: 72px 0 56px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .footer-logo img { height: 36px; width: auto; filter: brightness(10); opacity: 0.7; }
+    .footer-about {
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .footer-heading {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+    }
+    .footer-bottom a { color: rgba(255,255,255,0.35); transition: color 0.2s; }
+    .footer-bottom a:hover { color: var(--gold); }
+
+    /* ── NOTIFICATION MEMBRE ─────────────────── */
+    .member-notice {
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
+      padding: 16px 24px;
+      margin: 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--mid);
+    }
+    .member-notice a {
+      color: var(--burgundy);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .member-notice-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 1100px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .avantages-grid { grid-template-columns: repeat(2, 1fr); }
+      .chiffres-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 900px) {
+      :root { --section-py: 64px; }
+      .avantages-header { grid-template-columns: 1fr; gap: 24px; }
+      .evenements-inner { grid-template-columns: 1fr; }
+      .evenements-aside { position: static; }
+      .cotisation-inner { grid-template-columns: 1fr; gap: 40px; }
+      .contact-inner { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .logo-text { display: none; }
+      .avantages-grid { grid-template-columns: 1fr; }
+      .chiffres-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-main { grid-template-columns: 1fr; gap: 32px; }
+      .topbar-links { display: none; }
+      .hero-title { font-size: 38px; }
+    }
+
+    /* ── ANIMATIONS ──────────────────────────── */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .fade-up:nth-child(2) { transition-delay: 0.1s; }
+      .fade-up:nth-child(3) { transition-delay: 0.2s; }
+      .fade-up:nth-child(4) { transition-delay: 0.3s; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span>Association des Licenciés et Masters en Notariat — Belgique francophone</span>
+      <div class="topbar-links">
+        <a href="mailto:info@e-aln.be">info@e-aln.be</a>
+        <a href="https://wp.e-aln.be/evenements">Événements</a>
+        <a href="https://wp.e-aln.be/register/cotisation-2026/">Cotisation 2026</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="logo">
+          <img src="https://wp.e-aln.be/wp-content/uploads/2016/01/Logo_ALN_sansbaseline1.png" alt="ALN logo">
+          <div class="logo-text">
+            <strong>ALN</strong>
+            <span>Licenciés &amp; Masters en Notariat</span>
+          </div>
+        </a>
+
+        <nav>
+          <a href="/" class="nav-link active">Accueil</a>
+          <a href="https://wp.e-aln.be/avantages/" class="nav-link">Avantages</a>
+          <a href="https://wp.e-aln.be/evenements" class="nav-link">Événements</a>
+          <a href="https://wp.e-aln.be/conseil-dadministration/" class="nav-link">Association</a>
+          <a href="https://wp.e-aln.be/members/" class="nav-link">Répertoire</a>
+          <a href="https://wp.e-aln.be/sponsors/" class="nav-link">Sponsors</a>
+        </nav>
+
+        <div class="header-cta">
+          <a href="https://wp.e-aln.be/wp-login.php" class="btn-login">Connexion</a>
+          <a href="https://wp.e-aln.be/inscription/" class="btn btn-primary">S'inscrire</a>
+        </div>
+
+        <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MEMBER NOTICE (displayed only for logged-out visitors) -->
+  <div class="container">
+    <div class="member-notice" id="memberNotice">
+      <span>Votre cotisation 2026 n'est pas encore enregistrée. <a href="https://wp.e-aln.be/register/cotisation-2026/">Régulariser ma situation →</a></span>
+      <button class="member-notice-close" onclick="document.getElementById('memberNotice').style.display='none'" aria-label="Fermer">×</button>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-decor" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Association professionnelle · Fondée en 1978</div>
+        <h1 class="hero-title">
+          La référence des<br>
+          <em>masters</em> <strong>en notariat</strong>
+        </h1>
+        <p class="hero-desc">
+          L'ALN rassemble les titulaires du master en notariat exerçant en étude. 
+          Concours, formations, ouvrages à tarif préférentiel et réseau professionnel 
+          — tout ce dont vous avez besoin pour avancer dans votre carrière.
+        </p>
+        <div class="hero-actions">
+          <a href="https://wp.e-aln.be/inscription/" class="btn btn-primary">
+            Rejoindre l'ALN
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+          <a href="https://wp.e-aln.be/avantages/" class="btn btn-outline-white">Découvrir les avantages</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">40<span>+</span></div>
+            <div class="hero-stat-label">ans d'existence</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">500<span>+</span></div>
+            <div class="hero-stat-label">membres actifs</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">3</div>
+            <div class="hero-stat-label">événements / an</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card" aria-label="Avantages membres">
+        <div class="hero-card-title">Ce que vous obtenez en rejoignant l'ALN</div>
+        <div class="hero-card-item">
+          <div class="hero-card-dot"></div>
+          <div>
+            <div class="hero-card-item-title">Accès aux concours</div>
+            <div class="hero-card-item-text">Concours oral blanc, préparation aux épreuves notariales</div>
+          </div>
+        </div>
+        <div class="hero-card-item">
+          <div class="hero-card-dot"></div>
+          <div>
+            <div class="hero-card-item-title">Commande d'ouvrages</div>
+            <div class="hero-card-item-text">Code 2026 et ouvrages juridiques à tarif préférentiel</div>
+          </div>
+        </div>
+        <div class="hero-card-item">
+          <div class="hero-card-dot"></div>
+          <div>
+            <div class="hero-card-item-title">Répertoire des membres</div>
+            <div class="hero-card-item-text">Annuaire professionnel des licenciés en notariat</div>
+          </div>
+        </div>
+        <div class="hero-card-item">
+          <div class="hero-card-dot"></div>
+          <div>
+            <div class="hero-card-item-title">Événements & réseau</div>
+            <div class="hero-card-item-text">Soirées, assemblées générales, conférences</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-inner">
+      <span class="ticker-item">Concours oral blanc — 10 avril 2026</span>
+      <span class="ticker-item">Cotisation 2026 ouverte</span>
+      <span class="ticker-item">Commande du Code 2026 disponible</span>
+      <span class="ticker-item">Assemblée Générale — date à confirmer</span>
+      <span class="ticker-item">Concours oral blanc — 10 avril 2026</span>
+      <span class="ticker-item">Cotisation 2026 ouverte</span>
+      <span class="ticker-item">Commande du Code 2026 disponible</span>
+      <span class="ticker-item">Assemblée Générale — date à confirmer</span>
+    </div>
+  </div>
+
+  <!-- AVANTAGES -->
+  <section class="avantages" id="avantages">
+    <div class="container">
+      <div class="avantages-header">
+        <div>
+          <div class="eyebrow">Avantages membres</div>
+          <h2 class="section-title">Tout ce que l'ALN met à votre <em>disposition</em></h2>
+        </div>
+        <div>
+          <p class="section-lead">
+            L'adhésion à l'ALN vous donne accès à un ensemble d'avantages concrets, 
+            pensés pour accompagner les candidats-notaires tout au long de leur parcours professionnel.
+          </p>
+          <br>
+          <a href="https://wp.e-aln.be/avantages/" class="link-arrow">
+            Voir tous les avantages
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="avantages-grid">
+        <div class="avantage-card fade-up">
+          <div class="avantage-num">01</div>
+          <div class="avantage-title">Stages &amp; concours</div>
+          <p class="avantage-text">
+            Accès au concours oral blanc et aux informations sur les stages en étude notariale. 
+            La meilleure préparation aux épreuves de la profession.
+          </p>
+          <a href="https://wp.e-aln.be/avantages/stages/" class="link-arrow">
+            En savoir plus
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="avantage-card fade-up">
+          <div class="avantage-num">02</div>
+          <div class="avantage-title">Commande d'ouvrages</div>
+          <p class="avantage-text">
+            Accès à la précommande du Code 2026 et à d'autres ouvrages juridiques 
+            à des tarifs négociés réservés aux membres de l'association.
+          </p>
+          <a href="https://wp.e-aln.be/avantages/commande-douvrages/" class="link-arrow">
+            Commander
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="avantage-card fade-up">
+          <div class="avantage-num">03</div>
+          <div class="avantage-title">Réseau professionnel</div>
+          <p class="avantage-text">
+            Accès au répertoire des membres, participation aux événements exclusifs 
+            et aux assemblées générales de l'association.
+          </p>
+          <a href="https://wp.e-aln.be/members/" class="link-arrow">
+            Répertoire
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉVÉNEMENTS -->
+  <section class="evenements" id="evenements">
+    <div class="container">
+      <div class="evenements-inner">
+        <div class="evenements-aside">
+          <div class="eyebrow">Agenda</div>
+          <h2 class="section-title">Événements<br>à <em>venir</em></h2>
+          <div class="divider"></div>
+          <p class="section-lead">
+            L'ALN organise plusieurs événements tout au long de l'année pour ses membres : 
+            formations, soirées de networking, assemblées générales.
+          </p>
+          <br><br>
+          <a href="https://wp.e-aln.be/evenements" class="btn btn-primary" style="margin-top:8px;">
+            Voir l'agenda complet
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="event-list">
+          <div class="event-item fade-up">
+            <div class="event-date">
+              <div class="event-date-day">10</div>
+              <div class="event-date-month">Avr</div>
+            </div>
+            <div>
+              <div class="event-tag">Concours</div>
+              <div class="event-title">Concours oral blanc 2026</div>
+              <div class="event-meta">Vendredi 10 avril 2026 · Bruxelles</div>
+              <a href="https://wp.e-aln.be/evenement/concours-oral-blanc-2026/" class="event-cta">
+                S'inscrire
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 8h10M9 4l4 4-4 4"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="event-item fade-up">
+            <div class="event-date">
+              <div class="event-date-day">–</div>
+              <div class="event-date-month">2026</div>
+            </div>
+            <div>
+              <div class="event-tag">Assemblée</div>
+              <div class="event-title">Assemblée Générale annuelle</div>
+              <div class="event-meta">Date à confirmer · Lieu à communiquer</div>
+              <a href="https://wp.e-aln.be/conseil-dadministration/assemblee-generale/" class="event-cta">
+                Plus d'infos
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 8h10M9 4l4 4-4 4"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="event-item fade-up">
+            <div class="event-date">
+              <div class="event-date-day">–</div>
+              <div class="event-date-month">2026</div>
+            </div>
+            <div>
+              <div class="event-tag">Soirée</div>
+              <div class="event-title">Soirée de networking membres</div>
+              <div class="event-meta">Date à confirmer · Bruxelles</div>
+              <a href="https://wp.e-aln.be/evenements" class="event-cta">
+                Plus d'infos
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 8h10M9 4l4 4-4 4"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHIFFRES CLÉS -->
+  <section class="chiffres">
+    <div class="container">
+      <div class="chiffres-grid">
+        <div class="chiffre-item">
+          <div class="chiffre-num">40<sup>+</sup></div>
+          <div class="chiffre-label">Années d'existence</div>
+        </div>
+        <div class="chiffre-item">
+          <div class="chiffre-num">500<sup>+</sup></div>
+          <div class="chiffre-label">Membres actifs</div>
+        </div>
+        <div class="chiffre-item">
+          <div class="chiffre-num">3</div>
+          <div class="chiffre-label">Événements annuels</div>
+        </div>
+        <div class="chiffre-item">
+          <div class="chiffre-num">1</div>
+          <div class="chiffre-label">Seule association du secteur</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COTISATION -->
+  <section class="cotisation" id="cotisation">
+    <div class="container">
+      <div class="cotisation-inner">
+        <div class="cotisation-text">
+          <div class="eyebrow">Adhésion</div>
+          <h2 class="section-title">Devenez membre de <em>l'ALN</em> en 2026</h2>
+          <p class="section-lead">
+            La qualité de membre est réservée aux titulaires du master en notariat 
+            occupant un emploi dans une étude notariale. Les notaires (titulaires, 
+            associés ou salariés) ne peuvent être membres de l'association.
+          </p>
+          <br>
+          <p class="section-lead" style="font-size:14px;margin-top:8px;">
+            Votre cotisation vous donne accès immédiat à l'ensemble des avantages 
+            membres, au répertoire professionnel et aux événements de l'année.
+          </p>
+          <br><br>
+          <a href="https://wp.e-aln.be/conseil-dadministration/newsletters/" class="link-arrow" style="color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.2);">
+            Lire nos newsletters
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+
+        <div>
+          <div class="cotisation-card">
+            <div class="cotisation-price">
+              <div class="cotisation-amount">40</div>
+              <div class="cotisation-currency">€</div>
+            </div>
+            <div class="cotisation-period">par an · cotisation 2026</div>
+
+            <ul class="cotisation-list">
+              <li>Accès à la page Avantages membres</li>
+              <li>Concours oral blanc et formations</li>
+              <li>Commande d'ouvrages à tarif réduit</li>
+              <li>Accès au répertoire des membres</li>
+              <li>Invitation aux événements de l'année</li>
+              <li>Newsletters et informations professionnelles</li>
+            </ul>
+
+            <a href="https://wp.e-aln.be/register/cotisation-2026/" class="btn-white">
+              Renouveler ma cotisation
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
+            </a>
+            <p class="cotisation-note">Paiement sécurisé. Accès instantané après validation.</p>
+          </div>
+          <div style="margin-top:16px;">
+            <a href="https://wp.e-aln.be/inscription/" class="btn btn-outline-white" style="width:100%;justify-content:center;">
+              Nouvelle inscription
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPONSORS -->
+  <section class="sponsors">
+    <div class="container">
+      <div class="sponsors-label">Partenaires &amp; sponsors</div>
+      <div class="sponsors-logos">
+        <span class="sponsor-placeholder">Partenaire A</span>
+        <span class="sponsor-placeholder">Partenaire B</span>
+        <span class="sponsor-placeholder">Partenaire C</span>
+        <span class="sponsor-placeholder">Partenaire D</span>
+        <span class="sponsor-placeholder">Partenaire E</span>
+      </div>
+      <div style="text-align:center;margin-top:32px;">
+        <a href="https://wp.e-aln.be/sponsors/" class="link-arrow" style="color:var(--muted);">
+          Devenir partenaire de l'ALN
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div>
+          <div class="eyebrow">Contact</div>
+          <h2 class="section-title">Une question ? <em>Écrivez-nous</em></h2>
+          <div class="divider"></div>
+
+          <div class="contact-info">
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-info-label">E-mail général</div>
+                <div class="contact-info-value">info@e-aln.be</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-info-label">Support technique</div>
+                <div class="contact-info-value">webmaster@e-aln.be</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-row">
+            <a href="https://www.facebook.com/ALNASBL/" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+              </svg>
+            </a>
+            <a href="https://instagram.com/associationaln" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/association-des-licenci%C3%A9s-en-notariat/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <form class="contact-form" onsubmit="handleContactForm(event)" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="contact-nom">Nom et prénom</label>
+            <input class="form-input" type="text" id="contact-nom" name="nom" placeholder="Dupont Marie" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contact-email">Adresse e-mail <span style="color:var(--burgundy)">*</span></label>
+            <input class="form-input" type="email" id="contact-email" name="email" placeholder="marie.dupont@etude.be" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contact-sujet">Sujet</label>
+            <input class="form-input" type="text" id="contact-sujet" name="sujet" placeholder="Cotisation, événement, autre…">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contact-message">Message</label>
+            <textarea class="form-textarea" id="contact-message" name="message" placeholder="Votre message…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="align-self:flex-start;">
+            Envoyer le message
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </button>
+          <p id="form-msg" style="font-size:13px;color:var(--muted);display:none;">Message envoyé. Nous vous répondrons dans les meilleurs délais.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-main">
+        <div>
+          <div class="footer-logo">
+            <img src="https://wp.e-aln.be/wp-content/uploads/2016/01/Logo_ALN_sansbaseline1.png" alt="ALN">
+          </div>
+          <p class="footer-about">
+            L'Association des Licenciés et Masters en Notariat regroupe les diplômés du master en notariat 
+            exerçant en Belgique francophone.
+          </p>
+          <div class="social-row" style="padding-top:20px;margin-top:0;border-color:rgba(255,255,255,0.07);">
+            <a href="https://www.facebook.com/ALNASBL/" target="_blank" rel="noopener" class="social-link" style="background:rgba(255,255,255,0.06);" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+              </svg>
+            </a>
+            <a href="https://instagram.com/associationaln" target="_blank" rel="noopener" class="social-link" style="background:rgba(255,255,255,0.06);" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/association-des-licenci%C3%A9s-en-notariat/" target="_blank" rel="noopener" class="social-link" style="background:rgba(255,255,255,0.06);" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-heading">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="https://wp.e-aln.be/avantages/">Avantages membres</a></li>
+            <li><a href="https://wp.e-aln.be/avantages/stages/">Stages &amp; concours</a></li>
+            <li><a href="https://wp.e-aln.be/avantages/commande-douvrages/">Commande d'ouvrages</a></li>
+            <li><a href="https://wp.e-aln.be/evenements">Événements</a></li>
+            <li><a href="https://wp.e-aln.be/members/">Répertoire des membres</a></li>
+            <li><a href="https://wp.e-aln.be/sponsors/">Sponsors</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Association</div>
+          <ul class="footer-links">
+            <li><a href="https://wp.e-aln.be/conseil-dadministration/presentation-du-ca/">Présentation du CA</a></li>
+            <li><a href="https://wp.e-aln.be/conseil-dadministration/newsletters/">Newsletters</a></li>
+            <li><a href="https://wp.e-aln.be/conseil-dadministration/assemblee-generale/">Assemblée Générale</a></li>
+            <li><a href="https://wp.e-aln.be/conseil-dadministration/assemblee-generale/pv-dag/">PV d'AG</a></li>
+            <li><a href="https://wp.e-aln.be/conseil-dadministration/photos/">Photos</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Espace membres</div>
+          <ul class="footer-links">
+            <li><a href="https://wp.e-aln.be/wp-login.php">Se connecter</a></li>
+            <li><a href="https://wp.e-aln.be/inscription/">Nouvelle inscription</a></li>
+            <li><a href="https://wp.e-aln.be/register/cotisation-2026/">Cotisation 2026</a></li>
+            <li><a href="https://wp.e-aln.be/wp-login.php?action=lostpassword">Mot de passe oublié</a></li>
+          </ul>
+          <div style="margin-top:28px;">
+            <a href="https://wp.e-aln.be/register/cotisation-2026/" class="btn btn-primary" style="font-size:11px;padding:10px 20px;">
+              Cotisation 2026 →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Association des Licenciés et Masters en Notariat · ASBL de droit belge</span>
+        <div style="display:flex;gap:24px;">
+          <a href="#">Mentions légales</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="mailto:webmaster@e-aln.be">Contact technique</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    function handleContactForm(e) {
+      e.preventDefault();
+      const msg = document.getElementById('form-msg');
+      msg.style.display = 'block';
+      e.target.reset();
+      setTimeout(() => { msg.style.display = 'none'; }, 6000);
+    }
+  </script>
+
+</body>
+</html>
