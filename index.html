@@ -813,9 +813,10 @@
 
     /* ── SPONSORS ────────────────────────────── */
     .sponsors {
-      padding: 64px 0;
+      padding: 56px 0;
       background: var(--cream-deep);
       border-top: 1px solid var(--border-light);
+      overflow: hidden;
     }
     .sponsors-label {
       text-align: center;
@@ -823,24 +824,60 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--light);
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
-    .sponsors-logos {
+    .sponsors-track-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .sponsors-track-wrap::before,
+    .sponsors-track-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .sponsors-track-wrap::before {
+      left: 0;
+      background: linear-gradient(to right, var(--cream-deep), transparent);
+    }
+    .sponsors-track-wrap::after {
+      right: 0;
+      background: linear-gradient(to left, var(--cream-deep), transparent);
+    }
+    .sponsors-track {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: max-content;
+      animation: sponsors-scroll 28s linear infinite;
+    }
+    .sponsors-track:hover { animation-play-state: paused; }
+    .sponsor-logo-item {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 60px;
-      flex-wrap: wrap;
+      padding: 0 52px;
+      flex-shrink: 0;
     }
-    .sponsor-placeholder {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 400;
-      color: var(--light);
-      letter-spacing: 0.06em;
-      transition: color 0.2s;
+    .sponsor-logo-item img {
+      height: 44px;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
+      filter: grayscale(100%) opacity(0.45);
+      transition: filter 0.3s ease;
     }
-    .sponsor-placeholder:hover { color: var(--burgundy); }
+    .sponsor-logo-item img:hover {
+      filter: grayscale(0%) opacity(1);
+    }
+    @keyframes sponsors-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
     /* ── CONTACT ─────────────────────────────── */
     .contact {
@@ -1089,7 +1126,7 @@
           <a href="/" class="nav-link active">Accueil</a>
           <a href="https://wp.e-aln.be/avantages/" class="nav-link">Avantages</a>
           <a href="https://wp.e-aln.be/evenements" class="nav-link">Événements</a>
-          <a href="https://wp.e-aln.be/conseil-dadministration/" class="nav-link">Association</a>
+          <a href="a-propos.html" class="nav-link">À propos</a>
           <a href="https://wp.e-aln.be/members/" class="nav-link">Répertoire</a>
           <a href="https://wp.e-aln.be/sponsors/" class="nav-link">Sponsors</a>
         </nav>
@@ -1443,23 +1480,30 @@
 
   <!-- SPONSORS -->
   <section class="sponsors">
-    <div class="container">
-      <div class="sponsors-label">Partenaires &amp; sponsors</div>
-      <div class="sponsors-logos">
-        <span class="sponsor-placeholder">Partenaire A</span>
-        <span class="sponsor-placeholder">Partenaire B</span>
-        <span class="sponsor-placeholder">Partenaire C</span>
-        <span class="sponsor-placeholder">Partenaire D</span>
-        <span class="sponsor-placeholder">Partenaire E</span>
+    <div class="sponsors-label">Partenaires &amp; sponsors</div>
+    <div class="sponsors-track-wrap">
+      <div class="sponsors-track">
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/ing-logoAAA-1-200x100-1.jpg" alt="ING AAA"></div>
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/ing-logoALN-200x100-1.jpg" alt="ING ALN"></div>
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/big-logo-200x100-1.png" alt="BIG"></div>
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/Wolters_Kluwer_Logo-200x100-1.png" alt="Wolters Kluwer"></div>
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/Larcier_Logo-200x100-200x100-1.png" alt="Larcier"></div>
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2025/06/logo-septeo-notary-solutions-rgb_horiz-orange-blue-4-1024x300.png" alt="Septeo Notary Solutions"></div>
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/ing-logoAAA-1-200x100-1.jpg" alt="ING AAA"></div>
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/ing-logoALN-200x100-1.jpg" alt="ING ALN"></div>
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/big-logo-200x100-1.png" alt="BIG"></div>
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/Wolters_Kluwer_Logo-200x100-1.png" alt="Wolters Kluwer"></div>
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/Larcier_Logo-200x100-200x100-1.png" alt="Larcier"></div>
+        <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2025/06/logo-septeo-notary-solutions-rgb_horiz-orange-blue-4-1024x300.png" alt="Septeo Notary Solutions"></div>
       </div>
-      <div style="text-align:center;margin-top:32px;">
-        <a href="https://wp.e-aln.be/sponsors/" class="link-arrow" style="color:var(--muted);">
-          Devenir partenaire de l'ALN
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12">
-            <path d="M3 8h10M9 4l4 4-4 4"/>
-          </svg>
-        </a>
-      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px;">
+      <a href="https://wp.e-aln.be/sponsors/" class="link-arrow" style="color:var(--muted);">
+        Devenir partenaire de l'ALN
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </a>
     </div>
   </section>
 
@@ -1547,6 +1591,26 @@
 
   <!-- FOOTER -->
   <footer>
+    <div style="background:#111;padding:28px 0;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.05);position:relative;">
+      <div style="position:absolute;top:0;bottom:0;left:0;width:100px;background:linear-gradient(to right,#111,transparent);z-index:2;pointer-events:none;"></div>
+      <div style="position:absolute;top:0;bottom:0;right:0;width:100px;background:linear-gradient(to left,#111,transparent);z-index:2;pointer-events:none;"></div>
+      <div style="display:flex;width:max-content;animation:sponsors-scroll 32s linear infinite;">
+        <div style="display:flex;align-items:center;">
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/ing-logoAAA-1-200x100-1.jpg" alt="ING AAA" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/ing-logoALN-200x100-1.jpg" alt="ING ALN" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/big-logo-200x100-1.png" alt="BIG" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/Wolters_Kluwer_Logo-200x100-1.png" alt="Wolters Kluwer" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/Larcier_Logo-200x100-200x100-1.png" alt="Larcier" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2025/06/logo-septeo-notary-solutions-rgb_horiz-orange-blue-4-1024x300.png" alt="Septeo" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/ing-logoAAA-1-200x100-1.jpg" alt="ING AAA" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/ing-logoALN-200x100-1.jpg" alt="ING ALN" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/big-logo-200x100-1.png" alt="BIG" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/Wolters_Kluwer_Logo-200x100-1.png" alt="Wolters Kluwer" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2020/08/Larcier_Logo-200x100-200x100-1.png" alt="Larcier" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+          <div class="sponsor-logo-item"><img src="https://wp.e-aln.be/wp-content/uploads/2025/06/logo-septeo-notary-solutions-rgb_horiz-orange-blue-4-1024x300.png" alt="Septeo" style="height:34px;filter:grayscale(100%) brightness(3) opacity(0.2);transition:filter .3s;" onmouseover="this.style.filter='grayscale(0%) opacity(0.85)'" onmouseout="this.style.filter='grayscale(100%) brightness(3) opacity(0.2)'"></div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="footer-main">
         <div>
@@ -1591,7 +1655,7 @@
         <div>
           <div class="footer-heading">Association</div>
           <ul class="footer-links">
-            <li><a href="https://wp.e-aln.be/conseil-dadministration/presentation-du-ca/">Présentation du CA</a></li>
+            <li><a href="a-propos.html">À propos de nous</a></li>
             <li><a href="https://wp.e-aln.be/conseil-dadministration/newsletters/">Newsletters</a></li>
             <li><a href="https://wp.e-aln.be/conseil-dadministration/assemblee-generale/">Assemblée Générale</a></li>
             <li><a href="https://wp.e-aln.be/conseil-dadministration/assemblee-generale/pv-dag/">PV d'AG</a></li>
